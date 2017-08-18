@@ -23,7 +23,7 @@ function M.authorization_url (conf, state)
     scope         = conf.scope,
     state         = state
   }
-  return conf.authorization_url..'?'..args
+  return conf.authorization_url .. (string.find(conf.authorization_url, '?') and '&' or '?') .. args
 end
 
 --- Requests an access token from the authorization server.
