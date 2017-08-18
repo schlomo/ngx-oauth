@@ -43,6 +43,7 @@ elseif cookies.get_refresh_token() then
 
 -- Neither access token nor refresh token found; bad luck, return HTTP 401.
 else
-  ngx.header['WWW-Authenticate'] = 'Bearer error="unauthorized"'
-  nginx.fail(401, 'No access token provided.')
+  return ngx.redirect(oauth.authorization_url(conf))
+--  ngx.header['WWW-Authenticate'] = 'Bearer error="unauthorized"'
+--  nginx.fail(401, 'No access token provided.')
 end
