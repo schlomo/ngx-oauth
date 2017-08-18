@@ -11,19 +11,20 @@ local par             = util.partial
 local starts_with     = util.starts_with
 
 local DEFAULTS = {
-  client_id         = '',
-  client_secret     = '',
-  scope             = '',
-  redirect_uri      = '/_oauth/callback',
-  oaas_uri          = '',  -- used only as a shorthand for setting these 3 below
-  authorization_url = '${oaas_uri}/authorize',
-  token_url         = '${oaas_uri}/token',
-  userinfo_url      = "${oaas_uri}/userinfo",
-  success_uri       = '/',
-  cookie_path       = '/',
-  cookie_prefix     = 'oauth_',
-  max_age           = 2592000, -- 30 days
-  aes_bits          = 128
+  client_id         = os.getenv('NGX_OAUTH_CLIENT_ID') or '',
+  client_secret     = os.getenv('NGX_OAUTH_CLIENT_SECRET') or '',
+  scope             = os.getenv('NGX_OAUTH_SCOPE') or '',
+  redirect_uri      = os.getenv('NGX_OAUTH_REDIRECT_URI') or '/_oauth/callback',
+  oaas_uri          = os.getenv('NGX_OAUTH_OAAS_URI') or '',  -- used only as a shorthand for setting these 3 below
+  authorization_url = os.getenv('NGX_OAUTH_AUTHORIZATION_URL') or '${oaas_uri}/authorize',
+  token_url         = os.getenv('NGX_OAUTH_TOKEN_URL') or '${oaas_uri}/token',
+  userinfo_url      = os.getenv('NGX_OAUTH_USERINFO_URL') or "${oaas_uri}/userinfo",
+  userinfo_field    = os.getenv('NGX_OAUTH_USERINFO_FIELD') or 'username',
+  success_uri       = os.getenv('NGX_OAUTH_SUCCESS_URI') or '/',
+  cookie_path       = os.getenv('NGX_OAUTH_COOKIE_PATH') or '/',
+  cookie_prefix     = os.getenv('NGX_OAUTH_COOKIE_PREFIX') or 'oauth_',
+  max_age           = os.getenv('NGX_OAUTH_MAX_AGE') or 2592000, -- 30 days
+  aes_bits          = os.getenv('NGX_OAUTH_AES_BITS') or 128
 }
 
 local OAAS_ENDPOINT_VARS = {'authorization_url', 'token_url', 'userinfo_url'}

@@ -37,7 +37,7 @@ elseif auth_code then
   cookies.add_token(token)
 
   local user = get_or_fail(httpc.get_for_json(conf.userinfo_url, token.access_token))
-  cookies.add_username(user.username)
+  cookies.add_username(user[conf.userinfo_field])
 
   log.info("authorized user '%s', redirecting to: %s", user.username, conf.success_uri)
   return ngx.redirect(conf.success_uri)
