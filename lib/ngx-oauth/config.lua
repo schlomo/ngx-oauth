@@ -21,6 +21,7 @@ local DEFAULTS = {
   userinfo_url      = os.getenv('NGX_OAUTH_USERINFO_URL') or "${oaas_uri}/userinfo",
   userinfo_field    = os.getenv('NGX_OAUTH_USERINFO_FIELD') or 'username',
   success_uri       = os.getenv('NGX_OAUTH_SUCCESS_URI') or '/',
+  cookie_insecure   = os.getenv('NGX_OAUTH_COOKIE_INSECURE') == "true", -- defaults to false
   cookie_path       = os.getenv('NGX_OAUTH_COOKIE_PATH') or '/',
   cookie_prefix     = os.getenv('NGX_OAUTH_COOKIE_PREFIX') or 'oauth_',
   max_age           = os.getenv('NGX_OAUTH_MAX_AGE') or 2592000, -- 30 days

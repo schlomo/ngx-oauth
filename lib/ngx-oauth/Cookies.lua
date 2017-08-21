@@ -42,9 +42,15 @@ return function (conf, crypto)
   local decrypt = par(crypto.decrypt, conf.aes_bits, conf.client_secret)
 
   local function create_cookie (name, value, max_age)
-    return nginx.format_cookie(conf.cookie_prefix..name, value, {
-      version = 1, secure = true, path = conf.cookie_path, max_age = max_age
-    })
+    attrs = {
+      version = 1,
+      path = conf.cookie_path,
+      max_age = max_age
+    }
+    if not conf.cookie_insecure then
+      attrs.secure = true
+    end
+    return nginx.format_cookie(conf.cookie_prefix..name, value, attrs)
   end
 
   local function clear_cookie (name)
